@@ -1,0 +1,87 @@
+// Learn.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+//
+
+#include <iostream>
+#include <string>
+#include <bitset>
+#include <iomanip>
+
+void binaryConvertion()
+{
+    std::string binary = "1101"; // 二进制字符串
+    std::string hex = "1F"; // 十六进制字符串
+    std::string decimal = "27"; // 十进制字符串
+
+    // 从二进制字符串转换为十进制
+    int decimalFromBinary = std::stoi(binary, nullptr, 2);
+    std::cout << "二进制转十进制: " << decimalFromBinary << std::endl;
+
+    // 从十六进制字符串转换为十进制
+    int decimalFromHex = std::stoi(hex, nullptr, 16);
+    std::cout << "十六进制转十进制: " << decimalFromHex << std::endl;
+
+    // 从十进制字符串转换为二进制字符串
+    std::string binaryFromDecimal = std::bitset<32>(std::stoi(decimal)).to_string();
+    std::cout << "十进制转二进制: " << binaryFromDecimal << std::endl;
+
+    // 从十进制字符串转换为十六进制字符串
+    //std::string hexFromDecimal = std::uppercase << std::setfill('0') << std::setw(2) << std::hex << std::stoi(decimal);
+    //std::cout << "十进制转十六进制: " << hexFromDecimal << std::endl;
+}
+
+#include <errno.h>
+#include <stdlib.h>
+#include <sstream>
+#include <iomanip>
+void binaryConvertion2()
+{
+    // parsing with error handling
+    const char* p = "10 200000000000000000000000000000 30 -40 junk";
+    printf("Parsing '%s':\n", p);
+    char* end;
+    for (long i = strtol(p, &end, 10);
+        p != end;
+        i = strtol(p, &end, 10))
+    {
+        printf("'%.*s' -> ", (int)(end - p), p);
+        p = end;
+        if (errno == ERANGE) {
+            printf("range error, got ");
+            errno = 0;
+        }
+        printf("%ld\n", i);
+    }
+
+    // parsing without error handling
+    printf("\"1010\" in binary  --> %ld\n", strtol("1010", NULL, 2));
+    printf("\"12\" in octal     --> %ld\n", strtol("12", NULL, 8));
+    printf("\"A\"  in hex       --> %ld\n", strtol("A", NULL, 16));
+    printf("\"junk\" in base-36 --> %ld\n", strtol("junk", NULL, 36));
+    printf("\"012\" in auto-detected base  --> %ld\n", strtol("012", NULL, 0));
+    printf("\"0xA\" in auto-detected base  --> %ld\n", strtol("0xA", NULL, 0));
+    printf("\"junk\" in auto-detected base -->  %ld\n", strtol("junk", NULL, 0));
+
+    std::stringstream ss;
+    int decimalNumber = 123456789;
+    
+    ss << std::hex << decimalNumber;
+    std::string hexString = ss.str();
+    std::cout << hexString << std::endl;
+}
+
+int main()
+{
+    std::cout << "Hello World!\n";
+    binaryConvertion2();
+}
+
+// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
+// 调试程序: F5 或调试 >“开始调试”菜单
+
+// 入门使用技巧: 
+//   1. 使用解决方案资源管理器窗口添加/管理文件
+//   2. 使用团队资源管理器窗口连接到源代码管理
+//   3. 使用输出窗口查看生成输出和其他消息
+//   4. 使用错误列表窗口查看错误
+//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
+//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
