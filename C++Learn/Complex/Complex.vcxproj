@@ -24,6 +24,7 @@
     <ProjectGuid>{eef09eea-30ea-42aa-9679-0780f60e5be9}</ProjectGuid>
     <RootNamespace>Complex</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>1-Complex</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -24,6 +24,7 @@
     <ProjectGuid>{91791ab1-3bb0-43d1-a284-538fbf1e25b9}</ProjectGuid>
     <RootNamespace>StackHeadMemoryManege</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>3-Stack_Head_MemoryManege</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
