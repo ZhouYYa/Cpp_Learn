@@ -14,6 +14,7 @@ boost::algorithm::replace_all(latestName, "\\\\", "\\");
 curproject = latestName.substr(0, latestName.rfind('\\'));
 curproject = curproject.substr(curproject.rfind('\\') + 1);
 
+//////////// union ////////////////
 typedef union
     {
         struct
