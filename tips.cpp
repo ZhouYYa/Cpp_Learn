@@ -30,3 +30,17 @@ typedef union
         }BitField;
         uint32_t m_value;
     }EVT_TRIGGER_REG_TRIGGER_WORD;
+
+template<typename T>
+auto GetRaw(T& configPtr, const QString& fileName) -> typename T::pointer
+{
+    using RawType = typename T::element_type;
+    if (!configPtr || (!fileName.isEmpty() && configPtr->ConfigFile() != fileName))
+    {
+        configPtr.reset(new RawType());
+        if (!configPtr->Init(fileName))
+            return nullptr;
+    }
+
+    return configPtr.get();
+}
