@@ -17,7 +17,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.2-Delegation", "5.2-Deleg
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.3-Inheritance", "5.3-Inheritance\5.3-Inheritance.vcxproj", "{E25304FF-43CA-49F9-B0B0-7832EA4FFE4A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Virtual", "Virtual\Virtual.vcxproj", "{6EA07D5F-772F-4928-8178-11A2F006FF74}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6-Virtual", "Virtual\Virtual.vcxproj", "{6EA07D5F-772F-4928-8178-11A2F006FF74}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7-ConversionFunction", "7-ConversionFunction\7-ConversionFunction.vcxproj", "{47909778-F948-4106-ACC0-7185E4139AB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,14 @@ Global
 		{6EA07D5F-772F-4928-8178-11A2F006FF74}.Release|x64.Build.0 = Release|x64
 		{6EA07D5F-772F-4928-8178-11A2F006FF74}.Release|x86.ActiveCfg = Release|Win32
 		{6EA07D5F-772F-4928-8178-11A2F006FF74}.Release|x86.Build.0 = Release|Win32
+		{47909778-F948-4106-ACC0-7185E4139AB9}.Debug|x64.ActiveCfg = Debug|x64
+		{47909778-F948-4106-ACC0-7185E4139AB9}.Debug|x64.Build.0 = Debug|x64
+		{47909778-F948-4106-ACC0-7185E4139AB9}.Debug|x86.ActiveCfg = Debug|Win32
+		{47909778-F948-4106-ACC0-7185E4139AB9}.Debug|x86.Build.0 = Debug|Win32
+		{47909778-F948-4106-ACC0-7185E4139AB9}.Release|x64.ActiveCfg = Release|x64
+		{47909778-F948-4106-ACC0-7185E4139AB9}.Release|x64.Build.0 = Release|x64
+		{47909778-F948-4106-ACC0-7185E4139AB9}.Release|x86.ActiveCfg = Release|Win32
+		{47909778-F948-4106-ACC0-7185E4139AB9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
