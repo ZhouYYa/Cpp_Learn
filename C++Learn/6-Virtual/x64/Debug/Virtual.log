@@ -1,0 +1,23 @@
+﻿E:\VisualStuido\VisualStudio\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Virtual.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Virutal.cpp
+F:\Code仓库\C++\Cpp_Learn\C++Learn\Virtual\Virutal.h(124,15): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+  (编译源文件“Virutal.cpp”)
+  
+F:\Code仓库\C++\Cpp_Learn\C++Learn\Virtual\Virutal.h(124,15): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+  (编译源文件“Virutal.cpp”)
+  
+F:\Code仓库\C++\Cpp_Learn\C++Learn\Virtual\Virutal.h(124,34): error C2238: 意外的标记位于“;”之前
+  (编译源文件“Virutal.cpp”)
+  
+F:\Code仓库\C++\Cpp_Learn\C++Learn\Virtual\Virutal.h(144,15): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+  (编译源文件“Virutal.cpp”)
+  
+F:\Code仓库\C++\Cpp_Learn\C++Learn\Virtual\Virutal.h(144,15): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+  (编译源文件“Virutal.cpp”)
+  
+F:\Code仓库\C++\Cpp_Learn\C++Learn\Virtual\Virutal.h(144,29): error C2238: 意外的标记位于“;”之前
+  (编译源文件“Virutal.cpp”)
+  
+F:\Code仓库\C++\Cpp_Learn\C++Learn\Virtual\Virutal.h(148,13): error C2065: “c”: 未声明的标识符
+  (编译源文件“Virutal.cpp”)
+  

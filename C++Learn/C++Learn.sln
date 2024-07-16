@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-Complex", "Complex\Complex.vcxproj", "{EEF09EEA-30EA-42AA-9679-0780F60E5BE9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-Complex", "1-Complex\Complex.vcxproj", "{EEF09EEA-30EA-42AA-9679-0780F60E5BE9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2-String", "String\String.vcxproj", "{BAB0CA97-41A9-4B97-BDD7-0346E3D15AB8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2-String", "2-String\String.vcxproj", "{BAB0CA97-41A9-4B97-BDD7-0346E3D15AB8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3-Stack_Head_MemoryManege", "Stack_Head_MemoryManege\Stack_Head_MemoryManege.vcxproj", "{91791AB1-3BB0-43D1-A284-538FBF1E25B9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3-Stack_Head_MemoryManege", "3-Stack_Head_MemoryManege\Stack_Head_MemoryManege.vcxproj", "{91791AB1-3BB0-43D1-A284-538FBF1E25B9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-Additional(static_template_namespace)", "4-Additional\4-Additional.vcxproj", "{EF26A231-EA50-40D6-9190-A8C4EE82AF2B}"
 EndProject
@@ -17,11 +17,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.2-Delegation", "5.2-Deleg
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.3-Inheritance", "5.3-Inheritance\5.3-Inheritance.vcxproj", "{E25304FF-43CA-49F9-B0B0-7832EA4FFE4A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6-Virtual", "Virtual\Virtual.vcxproj", "{6EA07D5F-772F-4928-8178-11A2F006FF74}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6-Virtual", "6-Virtual\Virtual.vcxproj", "{6EA07D5F-772F-4928-8178-11A2F006FF74}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7-ConversionFunction", "7-ConversionFunction\7-ConversionFunction.vcxproj", "{47909778-F948-4106-ACC0-7185E4139AB9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8-pointer like classes", "8-pointer like classes\8-pointer like classes.vcxproj", "{38C59DBC-DFB1-4CB0-947A-B54560A9B8E4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9-Variadic_templates", "9-Variadic_templates\Variadic_templates.vcxproj", "{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,14 @@ Global
 		{38C59DBC-DFB1-4CB0-947A-B54560A9B8E4}.Release|x64.Build.0 = Release|x64
 		{38C59DBC-DFB1-4CB0-947A-B54560A9B8E4}.Release|x86.ActiveCfg = Release|Win32
 		{38C59DBC-DFB1-4CB0-947A-B54560A9B8E4}.Release|x86.Build.0 = Release|Win32
+		{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}.Debug|x64.ActiveCfg = Debug|x64
+		{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}.Debug|x64.Build.0 = Debug|x64
+		{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}.Debug|x86.ActiveCfg = Debug|Win32
+		{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}.Debug|x86.Build.0 = Debug|Win32
+		{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}.Release|x64.ActiveCfg = Release|x64
+		{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}.Release|x64.Build.0 = Release|x64
+		{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}.Release|x86.ActiveCfg = Release|Win32
+		{DA5C9F8E-EAB6-45F0-8361-0D7CBCC8DEF8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <string>
 class Additional
 {
 };
@@ -82,8 +84,71 @@ struct pair {
         : first(p.first), second(p.second) {}
 };
 
+// specialization，模板特化
+template <class key> 
+struct hash {};
 
+template<>
+struct hash<char> {
+    size_t operator() (char x) const { return x; }
+};
 
+template<>
+struct hash<int> {
+    size_t operator() (int x) const { return x; }
+};
+
+template<>
+struct hash<long> {
+    size_t operator() (long x) const { return x; }
+};
+
+//std::cout << hash<long>() (1000);
+
+// partial specialization, 模板偏特化 -- 个数的偏
+template<typename T, typename Alloc=...>
+class vector
+{
+    //...
+};
+template<typename Alloc = ...>
+class vector<bool, Alloc>  // T特化为bool
+{
+    //...
+}
+//partial specialization, 模板偏特化 -- 范围的偏
+template <typename T>
+class C
+{
+    //...
+};
+template <typename U>
+class C<U*>
+{
+    //...
+};
+
+//C<string> obj1;
+//C<string*> obj2;
+
+// template template parameter, 模板模板参数
+template<typename T,
+        template<typename T>
+           class Container
+        >
+class XCls
+{
+private:
+    constainer<T> c;
+public:
+    /......
+};
+template<typename T>
+using Lst = list<T, allocator<T>>;
+XCls<string, list> mylst1;
+XCls<string, Lst> mylst2;
+
+// class中不可以定义namespace，但是可以再声明定义class
 namespace std
 {
     //...
@@ -95,5 +160,6 @@ int main()
 
     Account a;
     a.set_rate(7.0);
+    //std::cout << "" << std::endl;
 }
 
