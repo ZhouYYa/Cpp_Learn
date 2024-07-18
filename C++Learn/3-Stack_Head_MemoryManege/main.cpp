@@ -60,3 +60,57 @@ heap object的生命期：
     delete p;       //  调用1次dtor
 */
 
+
+// 重载::operator new, ::operator delete
+// ::operator new[], ::operator delete[]
+
+void* myAlloc(size_t size)
+{
+    return malloc(size);
+}
+
+void* myFree(void* ptr)
+{
+    return free(ptr);
+}
+
+// 它们不可以被声明于一个namespace内
+inline void* operator new(size_t size)
+{
+    cout << "" << endl;
+    return myAlloc(size);
+}
+
+inline void* operator new[](size_t size)
+{
+    cout << "" << endl;
+    return myAlloc(size);
+}
+
+inline void operator delete(void* ptr)
+{
+    cout << "" << endl;
+    return myFree(ptr);
+}
+
+inline void operator delete[](void* ptr)
+{
+    cout << "" << endl;
+    return myFree(ptr);
+}
+
+// 重载member operator new/delete
+class Foo {
+public:
+    void* operator new(size_t);
+    void operator delete(void*, size_t); // size_t is optional.
+
+};
+
+// Foo *p = new Foo;   void* mem = operator new(sizeof(Foo));
+//                     p = static_cast<Foo*>(mem);
+//                     p->Foo::Foo();
+
+// delete p;           p->~Foo();
+//                     operator_delete(p);
+

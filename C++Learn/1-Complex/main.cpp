@@ -78,8 +78,13 @@ namespace complex {
     public:
         complex(const double& re, const double& im) : real(re), imag(im) {};
 
+        // const 只能用在成员函数，不能用于全局函数
+        // 当成员函数的const版本和非const版本同时存在时，
+        // const对象调用const函数，非const对象调用非const
+        // const 成员函数不必考虑COW(copy on wirte).
         double GetReal() const { return this->real; }
         double GetImag() const { return this->imag; }
+
 
         complex& operator += (const complex& r)
         {
