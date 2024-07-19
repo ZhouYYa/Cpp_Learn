@@ -14,6 +14,18 @@ boost::algorithm::replace_all(latestName, "\\\\", "\\");
 curproject = latestName.substr(0, latestName.rfind('\\'));
 curproject = curproject.substr(curproject.rfind('\\') + 1);
 
+std::vector<std::string> StringSplit(const std::string& str, const char& delimiter)
+{
+	std::vector<std::string> res;
+	std::stringstream ss(str);
+	std::string item;
+	while (std::getline(ss, item, delimiter))
+	{
+		res.push_back(item);
+	}
+
+	return res;
+}
 /////////// 获取日期 ////////////////////
 SYSTEMTIME systemTime;
 GetLocalTime(&systemTime);
