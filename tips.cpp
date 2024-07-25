@@ -26,6 +26,30 @@ std::vector<std::string> StringSplit(const std::string& str, const char& delimit
 
 	return res;
 }
+
+bool isStringDouble(const std::string& s) {
+	std::istringstream iss(s);
+	double d;
+	iss >> d;
+	return iss.eof() && !iss.fail();
+}
+
+double stringToDouble(const std::string& s) {
+	double d;
+	try {
+		d = std::stod(s);
+	}
+	catch (const std::invalid_argument& e) {
+		std::cerr << "Invalid argument: " << e.what() << std::endl;
+		throw;
+	}
+	catch (const std::out_of_range& e) {
+		std::cerr << "Out of range: " << e.what() << std::endl;
+		throw;
+	}
+	return d;
+}
+
 /////////// 获取日期 ////////////////////
 SYSTEMTIME systemTime;
 GetLocalTime(&systemTime);
