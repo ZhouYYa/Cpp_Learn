@@ -35,6 +35,31 @@ ss << std::setw(4) << std::setfill('0') << systemTime.wYear << "-"
     << std::setw(2) << std::setfill('0') << systemTime.wDay;
 std::string curDate = ss.str();
 
+///////////  获取时间  /////////////////////
+std::chrono::time_point<std::chrono::steady_clock> m_TimeEnd = std::chrono::steady_clock::now();
+double dTime = std::chrono::duration_cast<std::chrono::nanoseconds>(m_TimeEnd - m_TimeStart).count() / 1e+6;
+
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+int main() {
+    auto start = std::chrono::high_resolution_clock::now();
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration<double, std::milli> duration = end - start;
+
+    double elapsed_milliseconds = duration.count();
+
+    std::cout << "Elapsed time: " << elapsed_milliseconds << " milliseconds" << std::endl;
+
+    return 0;
+}
+
+
 ///////////获取当前程序路径////////////////
     TCHAR rootPath[MAX_PATH];
     GetModuleFileName(NULL, rootPath, MAX_PATH);
