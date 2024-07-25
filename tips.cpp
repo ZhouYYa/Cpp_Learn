@@ -50,6 +50,21 @@ double stringToDouble(const std::string& s) {
 	return d;
 }
 
+#include <algorithm> // 包含std::transform
+#include <cctype>    // 包含std::tolower
+
+std::string toLowerCase(const std::string& str) {
+    std::string result = str;
+    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+    return result;
+}
+
+std::string toUpperCase(const std::string& str) {
+    std::string result = str;
+    std::transform(result.begin(), result.end(), result.begin(), ::toupper);
+    return result;
+}
+
 /////////// 获取日期 ////////////////////
 SYSTEMTIME systemTime;
 GetLocalTime(&systemTime);
