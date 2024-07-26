@@ -1,6 +1,9 @@
 #pragma comment(lib, "libcurl_a.lib")
 #pragma warning(disable : 4251)
 
+@echo off
+start /b /d "D:\Jupiter_RF_328C\SIP-JUPITER_RF_AUTO_CS3_V1_20240327_328C" WLAN_TCP_Server.exe
+	
 //////////// 对指针的使用 ////////////////
 std::shared_ptr<Type> m_pType;
 m_pType = std::make_shared<Type>();
