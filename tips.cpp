@@ -9,7 +9,6 @@ std::unique_ptr<Type> m_pType;
 m_pType = std::make_unique<Type>();
 
 Type* GetType() { return m_pType.get(); }
-//////////// 对指针的使用 ////////////////
 
 //////////// 对字符串的操作 ////////////////
 boost::algorithm::replace_all(latestName, "/", "\\");
@@ -70,67 +69,94 @@ std::string toUpperCase(const std::string& str) {
 
 MatchFile 
 {
-void getFileNameFromSN(std::string path, std::vector<std::string>& file, std::string SN)
-{
-    intptr_t file_handle = 0;
-    struct _finddata_t file_info;
-    std::string temp;
-    if ((file_handle = _findfirst(temp.assign(path).append("/*" + SN + "*").c_str(), &file_info)) != -1)
-    {
-        do
-        {
-            file.push_back(temp.assign(path).append("\\").append(file_info.name));
-        } while (_findnext(file_handle, &file_info) == 0);
-        _findclose(file_handle);
-    }
-    int fileSize = file.size();
-    std::vector<std::string> tmpFile;
-    for (int i = 0; i < fileSize; ++i)
-    {
-        std::vector<std::string> v_tmpFileSplit;
-        v_tmpFileSplit = StringSplit(file[i], "\\");
-        v_tmpFileSplit = StringSplit(v_tmpFileSplit[v_tmpFileSplit.size() - 1], "_");
-        if (v_tmpFileSplit[0] == SN)
-        {
-            tmpFile.push_back(file[i]);
-        }
-    }
-    file = tmpFile;
-}
-
-std::vector<std::string> my_file;
-getFileNameFromSN(rootPath, my_file, SN);
-std::string resCSVFilePath = "";
-
-for (int i = 0; i < my_file.size(); i++)
-{
-	//std::cout << my_file[i] << std::endl;
-	struct _stat stat_buffer;
-	int result = _stat(my_file[i].c_str(), &stat_buffer);
-	int curCrateTime = static_cast<int>(stat_buffer.st_mtime);
-	if (curCrateTime > createTime)
+	void getFileNameFromSN(std::string path, std::vector<std::string>& file, std::string SN)
 	{
-	    resCSVFilePath = my_file[i];
-	    createTime = curCrateTime;
+	    intptr_t file_handle = 0;
+	    struct _finddata_t file_info;
+	    std::string temp;
+	    if ((file_handle = _findfirst(temp.assign(path).append("/*" + SN + "*").c_str(), &file_info)) != -1)
+	    {
+	        do
+	        {
+	            file.push_back(temp.assign(path).append("\\").append(file_info.name));
+	        } while (_findnext(file_handle, &file_info) == 0);
+	        _findclose(file_handle);
+	    }
+	    int fileSize = file.size();
+	    std::vector<std::string> tmpFile;
+	    for (int i = 0; i < fileSize; ++i)
+	    {
+	        std::vector<std::string> v_tmpFileSplit;
+	        v_tmpFileSplit = StringSplit(file[i], "\\");
+	        v_tmpFileSplit = StringSplit(v_tmpFileSplit[v_tmpFileSplit.size() - 1], "_");
+	        if (v_tmpFileSplit[0] == SN)
+	        {
+	            tmpFile.push_back(file[i]);
+	        }
+	    }
+	    file = tmpFile;
+	}
+	
+	std::vector<std::string> my_file;
+	getFileNameFromSN(rootPath, my_file, SN);
+	std::string resCSVFilePath = "";
+	
+	for (int i = 0; i < my_file.size(); i++)
+	{
+		//std::cout << my_file[i] << std::endl;
+		struct _stat stat_buffer;
+		int result = _stat(my_file[i].c_str(), &stat_buffer);
+		int curCrateTime = static_cast<int>(stat_buffer.st_mtime);
+		if (curCrateTime > createTime)
+		{
+		    resCSVFilePath = my_file[i];
+		    createTime = curCrateTime;
+		}
+	}
+	
+	bool EndsWith(const std::string& str, const std::string& suffix)
+	{
+	    if (str.size() < suffix.size())
+	        return false;
+	    std::string tstr = str.substr(str.size() - suffix.size());
+	
+	    if (tstr.length() == suffix.length())
+	    {
+	        return std::equal(suffix.begin(), suffix.end(), tstr.begin(), comparePred);
+	    }
+	    else
+	    {
+	        return false;
+	    }
 	}
 }
 
-bool EndsWith(const std::string& str, const std::string& suffix)
-{
-    if (str.size() < suffix.size())
-        return false;
-    std::string tstr = str.substr(str.size() - suffix.size());
+/////////// 区分大小端（小端：低字节在低地址） /////////////////
+union endian {
+    int i;
+    char c[4];
+}u;
+int is_big_endian() {
+    u.i = 1;
+    return (u.c[0] == 0);
+}
 
-    if (tstr.length() == suffix.length())
-    {
-        return std::equal(suffix.begin(), suffix.end(), tstr.begin(), comparePred);
-    }
-    else
-    {
-        return false;
-    }
+int main()
+{
+    u.c[0] = 0x11;
+    u.c[1] = 0x22;
+    std::cout << std::hex << u.i << std::endl;
+    u.i = 0x01;
+    //std::cout << std::hex << *(u.c + 0) << std::endl;
+    printf("%x\n", *(u.c + 0));
+    std::cout << std::hex << static_cast<int>(*(u.c)) << std::endl;
+
+    int testCode = 0x1122;
+    char* c = (char*)(&testCode);
+    printf("0x%x\n", *(c + 0)); //大端为 0x11 小端为 0x22
+    printf("0x%x\n", *(c + 1));
 }
-}
+
 /////////// 获取日期 ////////////////////
 SYSTEMTIME systemTime;
 GetLocalTime(&systemTime);
