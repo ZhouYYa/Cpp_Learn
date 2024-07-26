@@ -10,6 +10,13 @@ m_pType = std::make_unique<Type>();
 
 Type* GetType() { return m_pType.get(); }
 
+//////////// 对数组操作 ///////////////////
+double d[8] = {0};
+memset(d, 0, 8 * sizeof(double));
+std::fill(std::begin(d), std::end(d), 0);
+doulble newD[8] = {0};
+std::copy(std::begin(newD), std::end(newD), std::begin(d));
+
 //////////// 对字符串的操作 ////////////////
 boost::algorithm::replace_all(latestName, "/", "\\");
 boost::algorithm::replace_all(latestName, "\\\\", "\\");
