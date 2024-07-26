@@ -157,6 +157,41 @@ int main()
     printf("0x%x\n", *(c + 1));
 }
 
+/////////// check 进程是否存在 ///////////////
+bool IsEverestProcessExit(const wstring& processName)
+{
+    bool bRet = false;
+    HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (hProcessSnap == INVALID_HANDLE_VALUE)
+        return false;
+
+    PROCESSENTRY32 pe32 = { 0 };
+    pe32.dwSize = sizeof(PROCESSENTRY32);
+    if (Process32First(hProcessSnap, &pe32)) {
+        do {
+            if (_wcsicmp(pe32.szExeFile, processName.c_str()) == 0)
+            {
+                bRet = true;
+                break;
+            }
+        } while (Process32Next(hProcessSnap, &pe32));
+    }
+    else {
+        bRet = false;
+    }
+    CloseHandle(hProcessSnap);
+    return bRet;
+}
+
+
+// todo: 判断进程是否启动(down)
+    if (!IsEverestProcessExit(L"WLAN_TCP_Server.exe"))
+    {
+        WinExec(WT328CServerPath.c_str(), SW_HIDE);
+        Sleep(100);
+    }
+
+
 /////////// 获取日期 ////////////////////
 SYSTEMTIME systemTime;
 GetLocalTime(&systemTime);
