@@ -150,7 +150,7 @@ int main()
     //std::cout << std::hex << *(u.c + 0) << std::endl;
     printf("%x\n", *(u.c + 0));
     std::cout << std::hex << static_cast<int>(*(u.c)) << std::endl;
-
+    std::cout << std::hex << (0xff & (u.c[0])) << std::endl;
     int testCode = 0x1122;
     char* c = (char*)(&testCode);
     printf("0x%x\n", *(c + 0)); //大端为 0x11 小端为 0x22
