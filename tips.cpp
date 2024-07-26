@@ -1,3 +1,6 @@
+#pragma comment(lib, "libcurl_a.lib")
+#pragma warning(disable : 4251)
+
 //////////// 对指针的使用 ////////////////
 std::shared_ptr<Type> m_pType;
 m_pType = std::make_shared<Type>();
@@ -65,6 +68,69 @@ std::string toUpperCase(const std::string& str) {
     return result;
 }
 
+MatchFile 
+{
+void getFileNameFromSN(std::string path, std::vector<std::string>& file, std::string SN)
+{
+    intptr_t file_handle = 0;
+    struct _finddata_t file_info;
+    std::string temp;
+    if ((file_handle = _findfirst(temp.assign(path).append("/*" + SN + "*").c_str(), &file_info)) != -1)
+    {
+        do
+        {
+            file.push_back(temp.assign(path).append("\\").append(file_info.name));
+        } while (_findnext(file_handle, &file_info) == 0);
+        _findclose(file_handle);
+    }
+    int fileSize = file.size();
+    std::vector<std::string> tmpFile;
+    for (int i = 0; i < fileSize; ++i)
+    {
+        std::vector<std::string> v_tmpFileSplit;
+        v_tmpFileSplit = StringSplit(file[i], "\\");
+        v_tmpFileSplit = StringSplit(v_tmpFileSplit[v_tmpFileSplit.size() - 1], "_");
+        if (v_tmpFileSplit[0] == SN)
+        {
+            tmpFile.push_back(file[i]);
+        }
+    }
+    file = tmpFile;
+}
+
+std::vector<std::string> my_file;
+getFileNameFromSN(rootPath, my_file, SN);
+std::string resCSVFilePath = "";
+
+for (int i = 0; i < my_file.size(); i++)
+{
+	//std::cout << my_file[i] << std::endl;
+	struct _stat stat_buffer;
+	int result = _stat(my_file[i].c_str(), &stat_buffer);
+	int curCrateTime = static_cast<int>(stat_buffer.st_mtime);
+	if (curCrateTime > createTime)
+	{
+	    resCSVFilePath = my_file[i];
+	    createTime = curCrateTime;
+	}
+}
+
+bool EndsWith(const std::string& str, const std::string& suffix)
+{
+    if (str.size() < suffix.size())
+        return false;
+    std::string tstr = str.substr(str.size() - suffix.size());
+
+    if (tstr.length() == suffix.length())
+    {
+        return std::equal(suffix.begin(), suffix.end(), tstr.begin(), comparePred);
+    }
+    else
+    {
+        return false;
+    }
+}
+}
 /////////// 获取日期 ////////////////////
 SYSTEMTIME systemTime;
 GetLocalTime(&systemTime);
