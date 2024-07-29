@@ -13,6 +13,20 @@ m_pType = std::make_unique<Type>();
 
 Type* GetType() { return m_pType.get(); }
 
+//////////// typedef ////////////////////
+typedef char* String; String s = "char";
+typedef struct {
+	int x; 
+	int y;
+} point;
+point p;
+typedef void (*FuncPtr)(int);
+void myFunction(int a) {
+    // 函数实现
+}
+FuncPtr ptr = myFunction; // 现在可以使用 FuncPtr 作为函数指针类型
+ptr(5); // 调用 myFunction(5)
+
 //////////// 对数组操作 ///////////////////
 double d[8] = {0};
 memset(d, 0, 8 * sizeof(double));
