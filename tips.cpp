@@ -40,10 +40,11 @@ ptr->memberVariable = 10;  // 访问类的成员变量并赋值
 [] (int x = 1) -> void { std::cout << x; }
 
 4. 尾返回类型（trailing return type）
-nline auto 
+inline auto 
 operator-(const reverse_iterator<_IteratorL>& __x,
 const reverse_iterator<_IteratorL>& __y)
 -> decltype(__y.base() - x.base());
+“-> 在这里用于指定函数 operator- 的返回类型，这个返回类型是通过 decltype 推导得出的，具体来说是 __y.base() - __x.base() 的类型;”
 
 //////////// 对数组initialize操作 ///////////////////
 double d[8] = {0};
