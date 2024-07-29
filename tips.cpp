@@ -27,7 +27,25 @@ void myFunction(int a) {
 FuncPtr ptr = myFunction; // 现在可以使用 FuncPtr 作为函数指针类型
 ptr(5); // 调用 myFunction(5)
 
-//////////// 对数组操作 ///////////////////
+//////////// -> 操作符 ///////////////////
+1. 成员访问符号 (->):
+MyClass* ptr = new MyClass();
+ptr->memberFunction();  // 调用类的成员函数
+ptr->memberVariable = 10;  // 访问类的成员变量并赋值
+
+2. 箭头成员运算符 (->):
+当重载时，用于在智能指针类和迭代器类中，方便地访问对象的成员。这种情况下，箭头成员运算符 -> 可以返回指针成员的成员，以及访问对象的成员。
+
+3. 在Lambda函数中，-> 符号用于指定返回类型或函数体的开头:
+[] (int x = 1) -> void { std::cout << x; }
+
+4. 尾返回类型（trailing return type）
+nline auto 
+operator-(const reverse_iterator<_IteratorL>& __x,
+const reverse_iterator<_IteratorL>& __y)
+-> decltype(__y.base() - x.base());
+
+//////////// 对数组initialize操作 ///////////////////
 double d[8] = {0};
 memset(d, 0, 8 * sizeof(double));
 std::fill(std::begin(d), std::end(d), 0);
