@@ -13,6 +13,14 @@ m_pType = std::make_unique<Type>();
 
 Type* GetType() { return m_pType.get(); }
 
+
+using ConfigFn = QString(AwinicMesConfig::*)();
+    static QMap<QString, ConfigFn> toText {
+        {"lot_no",          &AwinicMesConfig::LotID },
+        {"device_name",     &AwinicMesConfig::Device },
+        {"Assemble lot",     &AwinicMesConfig::AssemblyLot }
+}
+
 //////////// typedef ////////////////////
 typedef char* String; String s = "char";
 typedef struct {
