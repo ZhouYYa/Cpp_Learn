@@ -80,6 +80,15 @@ std::vector<std::string> StringSplit(const std::string& str, const char& delimit
 	return res;
 }
 
+std::string str = "apple,orange,banana,grape";
+// 使用 std::stringstream 分割字符串
+std::stringstream ss(str);
+std::string token;
+std::vector<std::string> tokens;
+while (std::getline(ss, token, ',')) {
+tokens.push_back(token);
+}
+
 bool isStringDouble(const std::string& s) {
 	std::istringstream iss(s);
 	double d;
