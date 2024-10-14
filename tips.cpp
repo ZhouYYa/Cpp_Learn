@@ -8,6 +8,22 @@ start /b /d "D:\Jupiter_RF_328C\SIP-JUPITER_RF_AUTO_CS3_V1_20240327_328C" WLAN_T
 const int size = 5;
 constexpr int size = 42;
 int vec[size];  // 初始化vec大小必须是常量。
+
+// ptrs是含有10个整形指针的数组
+int *ptrs[10];
+//不存在引用的数组
+// int &refs[10] = /*?*/;
+int arr[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+// 数组的引用 arrRef是arr的引用
+int(&arrRef)[10] = arr;
+// Parray指向一个含有10个整数的数组
+int(*Parray)[10] = &arr;
+
+vector<int> v1 = {1, 3, 5, 7, 9};
+vector<int> v2(v1);
+int a[] = {2, 4, 6, 8, 10};
+vector<int> v3(begin(a), end(a));
+
 /////////////////////////////////////////
 	
 //////////// 对指针的使用 ////////////////
