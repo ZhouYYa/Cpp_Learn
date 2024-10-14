@@ -3,6 +3,12 @@
 
 @echo off
 start /b /d "D:\Jupiter_RF_328C\SIP-JUPITER_RF_AUTO_CS3_V1_20240327_328C" WLAN_TCP_Server.exe
+
+////////////    vector    ////////////////
+const int size = 5;
+constexpr int size = 42;
+int vec[size];  // 初始化vec大小必须是常量。
+/////////////////////////////////////////
 	
 //////////// 对指针的使用 ////////////////
 std::shared_ptr<Type> m_pType;
