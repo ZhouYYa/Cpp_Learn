@@ -4,6 +4,25 @@
 @echo off
 start /b /d "D:\Jupiter_RF_328C\SIP-JUPITER_RF_AUTO_CS3_V1_20240327_328C" WLAN_TCP_Server.exe
 
+
+////////////  functional  ////////////////
+void testf(int a, int b, double c)
+{
+    a = a + b;
+    c = a * 2.5;
+    std::cout << a << " " << c << std::endl;
+}
+#include <functional>
+typedef std::function<void(int, int, double)> func;
+
+int main()
+{
+    func m_myFunc;
+    m_myFunc = std::bind(testf, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    m_myFunc(1, 2, 3.0);
+}
+
+
 ////////////    vector    ////////////////
 const int size = 5;
 constexpr int size = 42;
@@ -23,7 +42,6 @@ vector<int> v1 = {1, 3, 5, 7, 9};
 vector<int> v2(v1);
 int a[] = {2, 4, 6, 8, 10};
 vector<int> v3(begin(a), end(a));
-
 /////////////////////////////////////////
 	
 //////////// 对指针的使用 ////////////////
