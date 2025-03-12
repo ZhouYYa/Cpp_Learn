@@ -1,0 +1,129 @@
+#include <Windows.h>
+#include <iostream>
+#include <string>
+#include <vector>
+
+#define BUFFER_SIZE 4096
+
+int main()
+{
+    // 管道和进程句柄
+    HANDLE hChildStd_IN_Rd = NULL;
+    HANDLE hChildStd_IN_Wr = NULL;
+    HANDLE hChildStd_OUT_Rd = NULL;
+    HANDLE hChildStd_OUT_Wr = NULL;
+    SECURITY_ATTRIBUTES sa;
+
+    // 设置管道安全属性
+    sa.nLength = sizeof(SECURITY_ATTRIBUTES);
+    sa.bInheritHandle = TRUE;
+    sa.lpSecurityDescriptor = NULL;
+
+    // 创建输入管道（父进程写，子进程读）
+    if (!CreatePipe(&hChildStd_IN_Rd, &hChildStd_IN_Wr, &sa, 0)) {
+        std::cerr << "CreatePipe IN failed: " << GetLastError() << std::endl;
+        return 1;
+    }
+
+    // 创建输出管道（子进程写，父进程读）
+    if (!CreatePipe(&hChildStd_OUT_Rd, &hChildStd_OUT_Wr, &sa, 0)) {
+        std::cerr << "CreatePipe OUT failed: " << GetLastError() << std::endl;
+        return 1;
+    }
+
+    // 配置启动信息
+    STARTUPINFOA si;
+    PROCESS_INFORMATION pi;
+    ZeroMemory(&si, sizeof(si));
+    si.cb = sizeof(si);
+    si.hStdError = hChildStd_OUT_Wr;
+    si.hStdOutput = hChildStd_OUT_Wr;
+    si.hStdInput = hChildStd_IN_Rd;
+    si.dwFlags |= STARTF_USESTDHANDLES;
+
+    // 启动子进程
+    BOOL bSuccess = CreateProcessA(
+        "C:\\Path\\To\\YourApp.exe", // 替换为实际路径
+        NULL,       // 命令行参数
+        NULL,       // 进程安全属性
+        NULL,       // 线程安全属性
+        TRUE,       // 继承句柄
+        CREATE_NO_WINDOW, // 创建标志（无窗口）
+        NULL,       // 环境变量
+        NULL,       // 当前目录
+        &si,        // STARTUPINFO
+        &pi         // PROCESS_INFORMATION
+    );
+
+    if (!bSuccess) {
+        std::cerr << "CreateProcess failed: " << GetLastError() << std::endl;
+        return 1;
+    }
+
+    // 关闭不需要的句柄
+    CloseHandle(hChildStd_IN_Rd);
+    CloseHandle(hChildStd_OUT_Wr);
+
+    // 准备要发送的命令列表
+    std::vector<std::string> commands = {
+        "command1",
+        "command2",
+        "exit"
+    };
+
+    char buffer[BUFFER_SIZE];
+    DWORD bytesRead;
+
+    for (const auto& cmd : commands) {
+        // 发送命令（附加换行符）
+        std::string fullCmd = cmd + "\n";
+        DWORD bytesWritten;
+        if (!WriteFile(hChildStd_IN_Wr, fullCmd.c_str(), fullCmd.size(), &bytesWritten, NULL)) {
+            std::cerr << "WriteFile failed: " << GetLastError() << std::endl;
+            break;
+        }
+
+        std::cout << "Sent command: " << cmd << std::endl;
+
+        // 读取响应
+        std::string response;
+        while (true) {
+            // 检查管道是否有数据
+            DWORD bytesAvail = 0;
+            if (!PeekNamedPipe(hChildStd_OUT_Rd, NULL, 0, NULL, &bytesAvail, NULL)) {
+                break;
+            }
+
+            if (bytesAvail == 0) {
+                // 没有数据时短暂等待
+                Sleep(100);
+                continue;
+            }
+
+            // 读取可用数据
+            if (!ReadFile(hChildStd_OUT_Rd, buffer, BUFFER_SIZE - 1, &bytesRead, NULL) || bytesRead == 0) {
+                break;
+            }
+
+            buffer[bytesRead] = '\0';
+            response += buffer;
+
+            // 检查是否收到完整响应
+            if (response.find("0 ok") != std::string::npos ||
+                response.find("\n") != std::string::npos) {
+                break;
+            }
+        }
+
+        // 处理响应
+        std::cout << "Response: " << response << std::endl;
+    }
+
+    // 清理资源
+    CloseHandle(hChildStd_IN_Wr);
+    CloseHandle(hChildStd_OUT_Rd);
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
+
+    return 0;
+}
